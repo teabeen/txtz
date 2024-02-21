@@ -34,7 +34,7 @@ sudo mv txtz /usr/local/bin/
 
 ### Uninstalling from PATH (If installed using the option above)
 ```
-rm /usr/local/bin
+rm /usr/local/bin/txtz
 ```
 
 ### Usage 🖥️

@@ -12,8 +12,10 @@
 
 ## Installing 🚀
 
-### Option one - Building from source 🛠️  
+### Option one - Building from source🛠️  
 **More options coming soon**
+
+### *Linux*
 ```
 git clone https://github.com/VilliasDev/txtz.git # Clone the repository
 cd txtz
@@ -36,6 +38,9 @@ sudo mv txtz /usr/local/bin/
 ```
 rm /usr/local/bin/txtz
 ```
+
+
+
 
 ### Usage 🖥️
 

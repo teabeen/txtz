@@ -21,18 +21,18 @@ git clone https://github.com/VilliasDev/txtz.git # Clone the repository
 cd txtz
 ./premake5 gmake # Generate build files using premake5
 cd build
-make # Build the project
+make config=release # Build the project
 
 # OPTIONAL (But recommended): Move the binary to a directory included in the 
 # system's PATH
 cd ..
 cd bin
-cd Debug
+cd Release
 sudo mv txtz /usr/local/bin/
 
 
 ```
-> Note: The binary is located in /bin/Debug/
+
 
 ### Uninstalling from PATH (If installed using the option above)
 ```

@@ -11,7 +11,7 @@
 - **Efficient Analysis:** Written in C for optimal performance, txtz swiftly crunches through your text files, delivering results in a blink. (Because who has time to wait? ⏲)
 
 ## Installing 🚀
-
+*currently only avaiable on Linux (unless compiled on Windows and MacOS using Premake*
 ### Option one - Building from source🛠️  
 **More options coming soon**
 

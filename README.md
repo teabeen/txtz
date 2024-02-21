@@ -3,7 +3,7 @@
 
 
 
-#### *What is is? 🤔*
+#### *What is this?? 🤔*
 <p>TextStatz, fondly referred to as txtz, is a hobbyist's delight for analyzing text files. Developed in the realm of C, txtz is a unique addition to the array of text file analyzers. While it may not aim to outshine the heavyweight contenders, txtz is crafted with love and a touch of personality, offering a refreshing perspective on text file analysis. 😄</p>
 
 ## Features:
@@ -11,7 +11,7 @@
 - **Efficient Analysis:** Written in C for optimal performance, txtz swiftly crunches through your text files, delivering results in a blink. (Because who has time to wait? ⏲)
 
 ## Installing 🚀
-*currently only avaiable on Linux (unless compiled on Windows and MacOS using Premake*
+*currently only avaiable on Linux (unless compiled on Windows and MacOS using Premake*)
 ### Option one - Building from source🛠️  
 **More options coming soon**
 

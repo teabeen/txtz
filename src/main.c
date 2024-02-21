@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <libgen.h> // for basename()
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -49,7 +50,10 @@ int main(int argc, char *argv[]) {
         strcpy(filetype, "Unknown"); // If no extension found, mark it as 'Unknown'
     }
 
-    printf("Filename: %s\n", argv[1]);
+    // Extract filename from the full path
+    char *filename = basename(argv[1]);
+
+    printf("Filename: %s\n", filename);
     printf("Filetype: %s\n", filetype);
     printf("Lines: %d\n", lineCount);
     printf("Words: %d\n", wordCount);

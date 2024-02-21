@@ -53,16 +53,19 @@ int main(int argc, char *argv[]) {
     // Extract filename from the full path
     char *filename = basename(argv[1]);
 
+    fseek(file, 0, SEEK_END);
+    long int fsize = ftell(file);
+
     printf("Filename: %s\n", filename);
     printf("Filetype: %s\n", filetype);
+    printf("Filesize: %ld bytes \n", fsize);
     printf("Lines: %d\n", lineCount);
     printf("Words: %d\n", wordCount);
-
     printf("Characters: %d\n", charCount);
 
     
 
     fclose(file);
-
+    
     return 0;
 }

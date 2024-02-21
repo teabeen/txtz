@@ -46,12 +46,12 @@ void processFile(const char *filename) {
     }
 
     // Extract filename from the full path
-    char *base_name = basename(filename);
+    char *base_name = basename((char *)filename);
 
     fseek(file, 0, SEEK_END);
     long int fsize = ftell(file);
 
-    printf("Filename: %s\n", basename);
+    printf("Filename: %s\n", base_name);
     printf("Filetype: %s\n", filetype);
     printf("Filesize: %ld bytes\n", fsize);
     printf("Lines: %d\n", lineCount);

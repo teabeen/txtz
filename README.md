@@ -31,6 +31,11 @@ sudo mv txtz /usr/local/bin/
 ```
 > Note: The binary is located in /bin/Debug/
 
+### Uninstalling from PATH (If installed using the option above)
+```
+rm /usr/local/bin
+```
+
 ### Usage 🖥️
 
 ```

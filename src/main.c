@@ -39,9 +39,11 @@ int main(int argc, char *argv[]) {
         wordCount++;
     }
 
+    printf("Filename: %s\n", argv[1]);
     printf("Lines: %d\n", lineCount);
     printf("Words: %d\n", wordCount);
     printf("Characters: %d\n", charCount);
+    
 
     fclose(file);
 

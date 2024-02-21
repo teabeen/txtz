@@ -1,40 +1,68 @@
 #include <stdio.h>
 #include <string.h>
-#include <libgen.h>
-
-void processFile(const char *filename);
+#include <libgen.h> // for basename()
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        printf("Usage: %s <filename1> [filename2] [filename3] ...\n", argv[0]);
+    if (argc != 2) {
+        printf("Usage: %s <filename>\n type %s --help for more", argv[0], argv[0]);
         return 1;
     }
 
-    for (int i = 1; i < argc; i++) {
-        processFile(argv[i]);
-    }
-
-    return 0;
-}
-
-void processFile(const char *filename) {
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(argv[1], "r");
     if (file == NULL) {
-        printf("Error: Unable to open file %s\n", filename);
-        return;
+        printf("Error: Unable to open file %s\n", argv[1]);
+        return 1;
     }
 
     int lineCount = 0;
     int wordCount = 0;
     int charCount = 0;
+    char ch;
+    char filetype[10] = ""; // Initialize to empty string
+    int in_word = 0; // Flag to track if we're in a word
 
-    // Process the file
-    // ...
+    while ((ch = fgetc(file)) != EOF) {
+        charCount++;
 
-    printf("\nStatistics for %s:\n", filename);
+        if (ch == '\n') {
+            lineCount++;
+        }
+        if (ch == ' ' || ch == '\n' || ch == '\t') {
+            if (in_word) {
+                wordCount++;
+                in_word = 0; // Reset the flag since we encountered a space
+            }
+        } else {
+            in_word = 1; // We are in a word
+        }
+    }
+
+    // Count the last word if the file didn't end with space or newline
+    if (charCount > 0) {
+        wordCount++;
+    }
+
+    // Find the file extension
+    char *dot = strrchr(argv[1], '.');
+    if (dot) {
+        strcpy(filetype, dot + 1); // Copy the file extension to the 'filetype' array
+    } else {
+        strcpy(filetype, "Unknown"); // If no extension found, mark it as 'Unknown'
+    }
+
+    // Extract filename from the full path
+    char *filename = basename(argv[1]);
+
+    printf("Filename: %s\n", filename);
+    printf("Filetype: %s\n", filetype);
     printf("Lines: %d\n", lineCount);
     printf("Words: %d\n", wordCount);
+
     printf("Characters: %d\n", charCount);
 
+    
+
     fclose(file);
+
+    return 0;
 }

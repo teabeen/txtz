@@ -25,6 +25,7 @@ make # Build the project
 # system's PATH
 cd ..
 cd bin
+cd Debug
 sudo mv txtz /usr/local/bin/
 
 

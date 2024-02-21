@@ -49,6 +49,7 @@ rm /usr/local/bin/txtz
 
 Filename: file.txt
 Filetype: txt
+Filesize: 49 bytes
 Lines: 1
 Words: 6
 Characters: 22

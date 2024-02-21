@@ -2,23 +2,17 @@
 #include <string.h>
 #include <libgen.h> // for basename()
 
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Usage: %s <filename>\n", argv[0]);
-        return 1;
-    }
-
-    FILE *file = fopen(argv[1], "r");
+void processFile(const char *filename) {
+    FILE *file = fopen(filename, "r");
     if (file == NULL) {
-        printf("Error: Unable to open file %s\n", argv[1]);
-        return 1;
+        printf("Error: Unable to open file %s\n", filename);
+        return;
     }
 
     int lineCount = 0;
     int wordCount = 0;
     int charCount = 0;
     char ch;
-    char filetype[10] = ""; // Initialize to empty string
     int in_word = 0; // Flag to track if we're in a word
 
     while ((ch = fgetc(file)) != EOF) {
@@ -43,7 +37,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Find the file extension
-    char *dot = strrchr(argv[1], '.');
+    char filetype[10] = ""; // Initialize to empty string
+    char *dot = strrchr(filename, '.');
     if (dot) {
         strcpy(filetype, dot + 1); // Copy the file extension to the 'filetype' array
     } else {
@@ -51,21 +46,31 @@ int main(int argc, char *argv[]) {
     }
 
     // Extract filename from the full path
-    char *filename = basename(argv[1]);
+    char *base_name = basename(filename);
 
     fseek(file, 0, SEEK_END);
     long int fsize = ftell(file);
 
-    printf("Filename: %s\n", filename);
+    printf("Filename: %s\n", basename);
     printf("Filetype: %s\n", filetype);
-    printf("Filesize: %ld bytes \n", fsize);
+    printf("Filesize: %ld bytes\n", fsize);
     printf("Lines: %d\n", lineCount);
     printf("Words: %d\n", wordCount);
     printf("Characters: %d\n", charCount);
 
-    
-
     fclose(file);
-    
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        printf("Usage: %s <filename1> [<filename2> ...]\n", argv[0]);
+        return 1;
+    }
+
+    for (int i = 1; i < argc; i++) {
+        processFile(argv[i]);
+        printf("\n"); // Add a newline between each file's statistics
+    }
+
     return 0;
 }

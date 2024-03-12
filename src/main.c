@@ -4,7 +4,7 @@
 
 void processFile(const char *filename) {
     FILE *file = fopen(filename, "r");
-    if (file == NULL) {
+    if (file == NULL) { // Open the file to be scanned
         printf("Error: Unable to open file %s\n", filename);
         return;
     }
@@ -37,10 +37,10 @@ void processFile(const char *filename) {
     }
 
     // Find the file extension
-    char filetype[10] = ""; // Initialize to empty string
+    char filetype[10] = ""; 
     char *dot = strrchr(filename, '.');
     if (dot) {
-        strcpy(filetype, dot + 1); // Copy the file extension to the 'filetype' array
+        strcpy(filetype, dot + 1); // Copy the file extension to the filetype array
     } else {
         strcpy(filetype, "Unknown"); // If no extension found, mark it as 'Unknown'
     }

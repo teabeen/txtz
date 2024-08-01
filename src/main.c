@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-#include <libgen.h> // for basename()
+#include <libgen.h>
 
-void processFile(const char *filename) {
+void processFile(const char *filename)
+{
     FILE *file = fopen(filename, "r");
-    if (file == NULL) { // Open the file to be scanned
+    if (file == NULL)
+    {
         printf("Error: Unable to open file %s\n", filename);
         return;
     }
@@ -15,38 +17,52 @@ void processFile(const char *filename) {
     char ch;
     int in_word = 0; // Flag to track if we're in a word
 
-    while ((ch = fgetc(file)) != EOF) {
+    while ((ch = fgetc(file)) != EOF)
+    {
         charCount++;
 
-        if (ch == '\n') {
+        if (ch == '\n')
+        {
             lineCount++;
         }
-        if (ch == ' ' || ch == '\n' || ch == '\t') {
-            if (in_word) {
+        if (ch == ' ' || ch == '\n' || ch == '\t')
+        {
+            if (in_word)
+            {
                 wordCount++;
                 in_word = 0; // Reset the flag since we encountered a space
             }
-        } else {
+        }
+        else
+        {
             in_word = 1; // We are in a word
         }
     }
 
     // Count the last word if the file didn't end with space or newline
-    if (charCount > 0) {
+    if (in_word)
+    {
         wordCount++;
     }
 
     // Find the file extension
-    char filetype[10] = ""; 
-    char *dot = strrchr(filename, '.');
-    if (dot) {
-        strcpy(filetype, dot + 1); // Copy the file extension to the filetype array
-    } else {
+    char filetype[256] = ""; // Increased buffer size to avoid overflow
+    const char *dot = strrchr(filename, '.');
+    if (dot)
+    {
+        strncpy(filetype, dot + 1, sizeof(filetype) - 1); // Copy the file extension to the filetype array
+        filetype[sizeof(filetype) - 1] = '\0';            // Ensure null-termination
+    }
+    else
+    {
         strcpy(filetype, "Unknown"); // If no extension found, mark it as 'Unknown'
     }
 
     // Extract filename from the full path
-    char *base_name = basename((char *)filename);
+    char filename_copy[256];
+    strncpy(filename_copy, filename, sizeof(filename_copy) - 1);
+    filename_copy[sizeof(filename_copy) - 1] = '\0';
+    char *base_name = basename(filename_copy);
 
     fseek(file, 0, SEEK_END);
     long int fsize = ftell(file);
@@ -61,13 +77,16 @@ void processFile(const char *filename) {
     fclose(file);
 }
 
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
+int main(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
         printf("Usage: %s <filename1> [<filename2> ...]\n", argv[0]);
         return 1;
     }
 
-    for (int i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++)
+    {
         processFile(argv[i]);
         printf("\n"); // Add a newline between each file's statistics
     }

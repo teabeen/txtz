@@ -55,3 +55,6 @@ dkms.conf
 /bin/
 /build/
 
+
+# test files
+.txt

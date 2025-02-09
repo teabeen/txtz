@@ -24,7 +24,7 @@ int count_lines(FILE *file) {
             lines++;
         }
     }
-    return lines + 1; // Handles last line if no newline at the end
+    return lines;
 }
 
 int count_characters(FILE *file) {
